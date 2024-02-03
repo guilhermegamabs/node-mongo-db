@@ -23,4 +23,19 @@ router.get('/', async(req, res) => {
     }
 });
 
+router.get('/:id', async(req, res) => {
+    try{
+        const { id } = req.params;
+        const userDB = await User.findById({ _id: id });
+        if(!userDB) {
+            res.status(400).send({ message: "User doest not exists! "});
+        } else {
+            res.status(200).send(userDB);
+        }
+    } catch(error) {
+        console.log(error);
+        res.status(500).json({ message: error });
+    }
+});
+
 module.exports = router;
