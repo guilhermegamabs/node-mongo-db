@@ -10,6 +10,7 @@ require('./database/db');
 
 // Routes
 const productRoute = require('./routes/product');
+const userRoute = require('./routes/user');
 
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
@@ -19,6 +20,7 @@ app.get("/", (req, res) => {
 });
 
 app.use('/products', productRoute);
+app.use('/users', userRoute);
 
 app.listen(PORT, () => {
   console.log(`Running on PORT ${PORT}`);
