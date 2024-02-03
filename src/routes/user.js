@@ -13,4 +13,14 @@ router.post('/register', async(req, res) => {
     }
 });
 
+router.get('/', async(req, res) => {
+    try {
+        const userDB = await User.find({});
+        res.status(200).json({ userDB });
+    } catch(error) {
+        console.log(error);
+        res.status(500).json({ message: error });
+    }
+});
+
 module.exports = router;
