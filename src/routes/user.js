@@ -38,4 +38,19 @@ router.get('/:id', async(req, res) => {
     }
 });
 
+router.put('/update/:id', async(req, res) => {
+    try { 
+        const { id } = req.params;
+        const userDB = await User.findByIdAndUpdate(id, req.body);
+        if(!userDB) {
+            res.status(400).send({ message: "User doest not exists! "});
+        } else {
+            const userUpdated = await User.findById({ _id: id });
+            res.status(200).send(userUpdated);
+        }
+    } catch(error) {
+        res.status(500).send({ message: error });
+    }
+});
+
 module.exports = router;
